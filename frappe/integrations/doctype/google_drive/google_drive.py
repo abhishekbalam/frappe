@@ -184,20 +184,21 @@ def upload_system_backup_to_google_drive():
 	check_for_folder_in_google_drive()
 	account.load_from_db()
 
-	validate_file_size()
+	# validate_file_size()
 
-	if frappe.flags.create_new_backup:
-		set_progress(1, "Backing up Data.")
-		backup = new_backup()
-		file_urls = []
-		file_urls.append(backup.backup_path_db)
-		file_urls.append(backup.backup_path_conf)
+	# if frappe.flags.create_new_backup:
+	set_progress(1, "Backing up Data.")
+	backup = new_backup()
+	file_urls = []
+	file_urls.append(backup.backup_path_db)
+	file_urls.append(backup.backup_path_conf)
 
-		if account.file_backup:
-			file_urls.append(backup.backup_path_files)
-			file_urls.append(backup.backup_path_private_files)
-	else:
-		file_urls = get_latest_backup_file(with_files=account.file_backup)
+	if account.file_backup:
+		file_urls.append(backup.backup_path_files)
+		file_urls.append(backup.backup_path_private_files)
+	
+	# else:
+		# file_urls = get_latest_backup_file(with_files=account.file_backup)
 
 	for fileurl in file_urls:
 		if not fileurl:
