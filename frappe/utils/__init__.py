@@ -68,7 +68,7 @@ def get_formatted_email(user, mail=None):
 	fullname = get_fullname(user)
 
 	if not mail:
-		mail = get_email_address(user) or validate_email_address(user)
+		mail = get_email_address(user)
 
 	if not mail:
 		return ''
